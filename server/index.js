@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const { connectDB } = require("./config/db");
 const path = require("path");
 const setupRoutes = require("./routes/setup");
+const app = express();
 const loginRoutes = require("./routes/login");
 const dashboardRoutes = require("./routes/dashboard");
 const purchaseReturnsRoutes = require("./routes/purchaseReturns");
@@ -19,6 +20,8 @@ const suppliersRoutes = require("./routes/suppliers");
 const companyRoutes = require("./routes/company");
 const createTables = require("./models/initTables");
 
+const PORT = process.env.PORT || 5000;
+
 app.use(
 	cors({
 		origin: "https://msql.onrender.com",
@@ -27,9 +30,7 @@ app.use(
 		allowedHeaders: ["Content-Type", "Authorization"], // Make sure Authorization is allowed
 	})
 );
-const PORT = process.env.PORT || 5000;
 
-app.use(cors());
 app.use(bodyParser.json());
 
 //  Routes
