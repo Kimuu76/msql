@@ -47,6 +47,14 @@ app.use("/reports", reportsRoutes);
 app.use("/purchases", purchasesRoutes);
 app.use("/company", companyRoutes);
 
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static(path.join(__dirname, "../client/build")));
+
+	app.get("*", (req, res) => {
+		res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
+	});
+}
+
 app.listen(PORT, async () => {
 	await createTables();
 	await connectDB();
