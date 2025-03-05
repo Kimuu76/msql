@@ -1,0 +1,21 @@
+/** @format */
+
+.receipt {
+	width: 300px;
+	padding: 10px;
+	margin: 10px;
+	border: 1px solid black;
+	text-align: center;
+	background: white;
+	font-family: Arial, sans-serif;
+}
+
+@media print {
+	button {
+		display: none; /* Hide print button when printing */
+	}
+
+	.receipt {
+		page-break-after: always; /* Each receipt prints on a new page */
+	}
+}
