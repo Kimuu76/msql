@@ -22,14 +22,7 @@ const createTables = require("./models/initTables");
 
 const PORT = process.env.PORT || 5000;
 
-app.use(
-	cors({
-		origin: "https://msql.onrender.com",
-		methods: ["GET", "POST", "PUT", "DELETE"],
-		credentials: true, // Allow cookies
-		allowedHeaders: ["Content-Type", "Authorization"], // Make sure Authorization is allowed
-	})
-);
+app.use(cors());
 
 app.use(bodyParser.json());
 
@@ -46,14 +39,6 @@ app.use("/supplier", suppliersRoutes);
 app.use("/reports", reportsRoutes);
 app.use("/purchases", purchasesRoutes);
 app.use("/company", companyRoutes);
-
-if (process.env.NODE_ENV === "production") {
-	app.use(express.static(path.join(__dirname, "../client/build")));
-
-	app.get("*", (req, res) => {
-		res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
-	});
-}
 
 app.listen(PORT, async () => {
 	await createTables();
